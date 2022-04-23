@@ -1,0 +1,204 @@
+﻿<Window x:Class="TestTaskBGL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskBGL"
+        mc:Ignorable="d"
+        Title="TestTaskBGL" Height="510" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="True"/>
+            <Setter Property="GridLinesVisibility" Value="Vertical"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="AlternatingRowBackground" Value="AliceBlue"/>
+            <Setter Property="VerticalGridLinesBrush" Value="AliceBlue"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu x:Name="menu" Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Clear" Click="Clear_Click"/>
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Column="0" Grid.Row="0" Header="Companies">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Company name"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="tBoxCN"/>
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add" Click="AddCompany_Click"/>
+                        <Button Grid.Column="1" Content="Delete" Click="DeleteCompany_Click"/>
+                        <Button Grid.Column="2" Content="Output" Click="OutputCompany_Click"/>
+                        <Button Grid.Column="3" Content="Update" Click="UpdateCompany_Click"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="0" Grid.Row="1" Header="Departments">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="CompanyId"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="tBoxCId"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Department name"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="tBoxDepN"/>
+                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add" Click="AddDepartment_Click"/>
+                        <Button Grid.Column="1" Content="Delete" Click="DeleteDepartment_Click"/>
+                        <Button Grid.Column="2" Content="Output" Click="OutputDepartment_Click"/>
+                        <Button Grid.Column="3" Content="Update" Click="UpdateDepartment_Click"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="0" Grid.Row="2" Header="Positions">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="DepartmentId"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="tBoxDepId"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Position name"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="tBoxPosN"/>
+                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add" Click="AddPosition_Click"/>
+                        <Button Grid.Column="1" Content="Delete" Click="Deleteposition_Click"/>
+                        <Button Grid.Column="2" Content="Output" Click="OutputPosition_Click"/>
+                        <Button Grid.Column="3" Content="Update" Click="UpdatePosition_Click"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="0" Grid.Row="3" Header="Employees">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="PositionId"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="tBoxPosId"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Surname"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="tBoxSurName"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Name"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="tBoxName"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Patronymic"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="tBoxPatronymic"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Address"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="tBoxAddress"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" x:Name="tBoxPhone"/>
+                    <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add" Click="AddEmployee_Click"/>
+                        <Button Grid.Column="1" Content="Delete" Click="DeleteEmployee_Click"/>
+                        <Button Grid.Column="2" Content="Output" Click="OutputEmployee_Click"/>
+                        <Button Grid.Column="3" Content="Update" Click="UpdateEmployee_Click"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="4">
+                <TabItem x:Name="tabItem1" Header="Companies">
+                    <DataGrid x:Name="dataComp"/>
+                </TabItem>
+                <TabItem x:Name="tabItem2" Header="Departments">
+                    <DataGrid x:Name="dataDep"/>
+                </TabItem>
+                <TabItem x:Name="tabItem3" Header="Positions">
+                    <DataGrid x:Name="dataPos"/>
+                </TabItem>
+                <TabItem x:Name="tabItem4" Header="Employees">
+                    <DataGrid x:Name="dataEmp"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <StatusBar x:Name="statusBar" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="tbStatus" Grid.Column="0"/>
+            </Grid>
+        </StatusBar>
+    </Grid>
+</Window>
