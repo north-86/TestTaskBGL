@@ -31,7 +31,22 @@ namespace TestTaskBGL
             tbStatus.Text = "Ready";
         }
 
-        private void Clear_Click(object sender, RoutedEventArgs e)
+        private void ClearInput_Click(object sender, RoutedEventArgs e)
+        {
+            this.tBoxCN.Text = null;
+            this.tBoxCId.Text = null;
+            this.tBoxDepN.Text = null;
+            this.tBoxDepId.Text = null;
+            this.tBoxPosN.Text = null;
+            this.tBoxPosId.Text = null;
+            this.tBoxSurName.Text = null;
+            this.tBoxName.Text = null;
+            this.tBoxPatronymic.Text = null;
+            this.tBoxAddress.Text = null;
+            this.tBoxPhone.Text = null;
+        }
+
+        private void ClearOutput_Click(object sender, RoutedEventArgs e)
         {
             this.dataComp.ItemsSource = null;
             this.dataDep.ItemsSource = null;
@@ -278,6 +293,49 @@ namespace TestTaskBGL
                 Employee employee = (Employee)dataEmp.SelectedItem;
                 db.Employees.Update(employee);
                 db.SaveChanges();
+            }
+        }
+
+        private void ExportCSV_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataComp.ItemsSource != null & dataDep.ItemsSource != null & dataPos.ItemsSource != null & dataEmp.ItemsSource != null)
+            {
+                this.dataComp.SelectAllCells();
+                this.dataComp.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+                ApplicationCommands.Copy.Execute(null, this.dataComp);
+                this.dataComp.UnselectAllCells();
+                String result1 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+                this.dataDep.SelectAllCells();
+                this.dataDep.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+                ApplicationCommands.Copy.Execute(null, this.dataDep);
+                this.dataDep.UnselectAllCells();
+                String result2 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+                this.dataPos.SelectAllCells();
+                this.dataPos.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+                ApplicationCommands.Copy.Execute(null, this.dataPos);
+                this.dataPos.UnselectAllCells();
+                String result3 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+                this.dataEmp.SelectAllCells();
+                this.dataEmp.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+                ApplicationCommands.Copy.Execute(null, this.dataEmp);
+                this.dataEmp.UnselectAllCells();
+                String result4 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+                try
+                {
+                    StreamWriter sw = new StreamWriter("ExportData.csv", false, System.Text.Encoding.UTF8);
+                    sw.WriteLine(result1);
+                    sw.WriteLine(result2);
+                    sw.WriteLine(result3);
+                    sw.WriteLine(result4);
+                    sw.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }
