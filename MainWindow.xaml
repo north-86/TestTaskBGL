@@ -32,8 +32,14 @@
         </Grid.RowDefinitions>
         <Menu x:Name="menu" Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Clear" Click="Clear_Click"/>
+                <MenuItem Header="Clear All Input Fields" Click="ClearInput_Click"/>
+                <MenuItem Header="Clear All Output Fields" Click="ClearOutput_Click"/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Export">
+                <MenuItem Header="Export to CSV" Click="ExportCSV_Click"/>
+                <MenuItem Header="Export to XML"/>
+                <MenuItem Header="Export to JSON"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="About_Click"/>
