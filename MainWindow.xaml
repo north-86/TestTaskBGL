@@ -16,7 +16,6 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style TargetType="DataGrid">
-            <Setter Property="AutoGenerateColumns" Value="True"/>
             <Setter Property="GridLinesVisibility" Value="Vertical"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
@@ -184,16 +183,43 @@
             </GroupBox>
             <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="4">
                 <TabItem x:Name="tabItem1" Header="Companies">
-                    <DataGrid x:Name="dataComp"/>
+                    <DataGrid x:Name="dataComp" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CompanyId" Binding="{Binding Path=CompanyId}"/>
+                            <DataGridTextColumn Header="CompanyName" Binding="{Binding Path=CompanyName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem x:Name="tabItem2" Header="Departments">
-                    <DataGrid x:Name="dataDep"/>
+                    <DataGrid x:Name="dataDep" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="DepartmentId" Binding="{Binding Path=DepartmentId}"/>
+                            <DataGridTextColumn Header="CompanyId" Binding="{Binding Path=CompanyId}"/>
+                            <DataGridTextColumn Header="DepartmentName" Binding="{Binding Path=DepartmentName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem x:Name="tabItem3" Header="Positions">
-                    <DataGrid x:Name="dataPos"/>
+                    <DataGrid x:Name="dataPos" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="PositionId" Binding="{Binding Path=PositionId}"/>
+                            <DataGridTextColumn Header="DepartmentId" Binding="{Binding Path=DepartmentId}"/>
+                            <DataGridTextColumn Header="PositionName" Binding="{Binding Path=PositionName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem x:Name="tabItem4" Header="Employees">
-                    <DataGrid x:Name="dataEmp"/>
+                    <DataGrid x:Name="dataEmp" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="EmployeeId" Binding="{Binding Path=EmployeeId}"/>
+                            <DataGridTextColumn Header="PositionId" Binding="{Binding Path=PositionId}"/>
+                            <DataGridTextColumn Header="Surname" Binding="{Binding Path=EmpSurname}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=EmpName}"/>
+                            <DataGridTextColumn Header="Patronymic" Binding="{Binding Path=EmpPatronymic}"/>
+                            <DataGridTextColumn Header="Address" Binding="{Binding Path=Address}"/>
+                            <DataGridTextColumn Header="Phone" Binding="{Binding Path=Phone}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
         </Grid>
