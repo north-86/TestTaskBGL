@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="TestTaskBGL" Height="490" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
     <Window.Resources>
+        <SolidColorBrush x:Key="colorW" Color="White"/>
+        <SolidColorBrush x:Key="colorAB" Color="AliceBlue"/>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="{StaticResource colorAB}"/>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="{StaticResource colorAB}"/>
+        </Style>
         <Style TargetType="GroupBox">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Padding" Value="5"/>
@@ -15,12 +23,22 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource colorW}"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Background" Value="{StaticResource colorAB}"/>
+        </Style>
         <Style TargetType="DataGrid">
             <Setter Property="GridLinesVisibility" Value="Vertical"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
             <Setter Property="AlternatingRowBackground" Value="AliceBlue"/>
             <Setter Property="VerticalGridLinesBrush" Value="AliceBlue"/>
+            <Setter Property="Background" Value="{StaticResource colorW}"/>
+        </Style>
+        <Style TargetType="StatusBar">
+            <Setter Property="Background" Value="{StaticResource colorAB}"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -34,6 +52,9 @@
                 <MenuItem Header="Clear All Input Fields" Click="ClearInput_Click"/>
                 <MenuItem Header="Clear All Output Fields" Click="ClearOutput_Click"/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Select">
+                
             </MenuItem>
             <MenuItem Header="Export">
                 <MenuItem Header="Export to CSV" Click="ExportCSV_Click"/>
@@ -224,13 +245,7 @@
             </TabControl>
         </Grid>
         <StatusBar x:Name="statusBar" Grid.Row="2">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="tbStatus" Grid.Column="0"/>
-            </Grid>
+            <TextBlock x:Name="tbStatus"/>
         </StatusBar>
     </Grid>
 </Window>
