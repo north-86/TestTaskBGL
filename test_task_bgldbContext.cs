@@ -66,6 +66,8 @@ namespace TestTaskBGL
                     .HasConstraintName("FK__Employees__Posit__2C3393D0");
             });
 
+            modelBuilder.Entity<Employee>().HasQueryFilter(p => p.Phone == "000-000-000");
+
             modelBuilder.Entity<Position>(entity =>
             {
                 entity.Property(e => e.PositionName).HasMaxLength(100);
