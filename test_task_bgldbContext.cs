@@ -59,14 +59,14 @@ namespace TestTaskBGL
 
                 entity.Property(e => e.Phone).HasMaxLength(50);
 
+                entity.HasQueryFilter(e => e.Phone != "000-00-00");
+
                 entity.HasOne(d => d.Position)
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.PositionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Employees__Posit__2C3393D0");
             });
-
-            modelBuilder.Entity<Employee>().HasQueryFilter(p => p.Phone == "000-000-000");
 
             modelBuilder.Entity<Position>(entity =>
             {
