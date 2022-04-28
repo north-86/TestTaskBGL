@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskBGL"
         mc:Ignorable="d"
-        Title="TestTaskBGL" Height="490" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+        Title="TestTaskBGL" Height="495" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
     <Window.Resources>
         <SolidColorBrush x:Key="colorW" Color="White"/>
         <SolidColorBrush x:Key="colorAB" Color="AliceBlue"/>
         <Style TargetType="Menu">
             <Setter Property="Background" Value="{StaticResource colorAB}"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style TargetType="MenuItem">
             <Setter Property="Background" Value="{StaticResource colorAB}"/>
@@ -47,7 +48,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="menu" Grid.Row="0">
+        <Menu x:Name="menu" Grid.Row="0" BorderBrush="Black" BorderThickness="1">
             <MenuItem Header="File">
                 <MenuItem Header="Clear All Input Fields" Click="ClearInput_Click"/>
                 <MenuItem Header="Clear All Output Fields" Click="ClearOutput_Click"/>
@@ -242,10 +243,13 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
+                <TabItem x:Name="tabItem5" Header="SQL Query Result">
+                    <DataGrid x:Name="dataResult"></DataGrid>
+                </TabItem>
             </TabControl>
         </Grid>
         <StatusBar x:Name="statusBar" Grid.Row="2">
-            <TextBlock x:Name="tbStatus"/>
+            <TextBlock x:Name="tbStatus" FontSize="12"/>
         </StatusBar>
     </Grid>
 </Window>
