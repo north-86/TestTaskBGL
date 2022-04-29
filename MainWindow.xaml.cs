@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
+//using Microsoft.EntityFrameworkCore;
 
 namespace TestTaskBGL
 {
@@ -52,6 +53,7 @@ namespace TestTaskBGL
             this.dataDep.ItemsSource = null;
             this.dataPos.ItemsSource = null;
             this.dataEmp.ItemsSource = null;
+            this.dataResult.ItemsSource = null;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -296,9 +298,51 @@ namespace TestTaskBGL
             }
         }
 
+        private void ListEmpDep_Click(object sender, RoutedEventArgs e)
+        {
+            tabItem5.Focus();
+            using (test_task_bgldbContext db = new test_task_bgldbContext())
+            {
+                var listEmpDep = from c in db.Companies
+                                 join d in db.Departments on c.CompanyId equals d.CompanyId
+                                 join p in db.Positions on d.DepartmentId equals p.DepartmentId
+                                 join emp in db.Employees on p.PositionId equals emp.PositionId
+                                 select new 
+                                 {
+                                    Company = c.CompanyName,
+                                    Department = d.DepartmentName,
+                                    Position = p.PositionName,
+                                    Surname = emp.EmpSurname,
+                                    Name = emp.EmpName,
+                                    Patronymic = emp.EmpPatronymic
+                                 };
+                dataResult.ItemsSource = listEmpDep.ToList();
+            }
+        }
+
+        private void GeneralList_Click(object sender, RoutedEventArgs e)
+        {
+            tabItem5.Focus();
+            using (test_task_bgldbContext db = new test_task_bgldbContext())
+            {
+                var genListEmp = from c in db.Companies
+                                 join d in db.Departments on c.CompanyId equals d.CompanyId
+                                 join p in db.Positions on d.DepartmentId equals p.DepartmentId
+                                 join emp in db.Employees on p.PositionId equals emp.PositionId
+                                 select new
+                                 {
+                                     Company = c.CompanyName,
+                                     Surname = emp.EmpSurname,
+                                     Name = emp.EmpName,
+                                     Patronymic = emp.EmpPatronymic
+                                 };
+                dataResult.ItemsSource = genListEmp.ToList();
+            }
+        }
+
         private void ExportCSV_Click(object sender, RoutedEventArgs e)
         {
-            if (dataComp.ItemsSource != null & dataDep.ItemsSource != null & dataPos.ItemsSource != null & dataEmp.ItemsSource != null)
+            if (dataComp.ItemsSource != null & dataDep.ItemsSource != null & dataPos.ItemsSource != null & dataEmp.ItemsSource != null & dataResult.ItemsSource != null)
             {
                 this.dataComp.SelectAllCells();
                 this.dataComp.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
@@ -323,6 +367,12 @@ namespace TestTaskBGL
                 ApplicationCommands.Copy.Execute(null, this.dataEmp);
                 this.dataEmp.UnselectAllCells();
                 String result4 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+                this.dataResult.SelectAllCells();
+                this.dataResult.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+                ApplicationCommands.Copy.Execute(null, this.dataResult);
+                this.dataResult.UnselectAllCells();
+                String result5 = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
                 try
                 {
                     StreamWriter sw = new StreamWriter("ExportData.csv", false, System.Text.Encoding.UTF8);
@@ -330,6 +380,7 @@ namespace TestTaskBGL
                     sw.WriteLine(result2);
                     sw.WriteLine(result3);
                     sw.WriteLine(result4);
+                    sw.WriteLine(result5);
                     sw.Close();
                 }
                 catch (Exception ex)

@@ -55,7 +55,8 @@
                 <MenuItem Header="Exit" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Select">
-                
+                <MenuItem Header="List of Employees by Department" Click="ListEmpDep_Click"/>
+                <MenuItem Header="General List of Employees" Click="GeneralList_Click"/>
             </MenuItem>
             <MenuItem Header="Export">
                 <MenuItem Header="Export to CSV" Click="ExportCSV_Click"/>
