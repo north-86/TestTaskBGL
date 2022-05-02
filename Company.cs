@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TestTaskBGL
 {
@@ -12,7 +13,7 @@ namespace TestTaskBGL
 
         public int CompanyId { get; set; }
         public string CompanyName { get; set; } = null!;
-
+        [JsonIgnore]
         public virtual ICollection<Department> Departments { get; set; }
     }
 }
