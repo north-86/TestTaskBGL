@@ -60,9 +60,8 @@
             </MenuItem>
             <MenuItem Header="Export">
                 <MenuItem Header="Export to CSV" Click="ExportCSV_Click"/>
-                <MenuItem Header="Export to DOCX"/>
-                <MenuItem Header="Export to XML"/>
-                <MenuItem Header="Export to JSON"/>
+                <MenuItem Header="Export to XML" Click="UploadXML_Click"/>
+                <MenuItem Header="Export to JSON" Click="UploadJSON_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="About_Click"/>
