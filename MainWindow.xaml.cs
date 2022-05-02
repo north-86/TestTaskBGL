@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TestTaskBGL
 {
@@ -445,7 +446,28 @@ namespace TestTaskBGL
 
         private void UploadJSON_Click(object sender, RoutedEventArgs e)
         {
-            
+            using (test_task_bgldbContext db = new test_task_bgldbContext())
+            {
+                var company = db.Companies;
+                string fileName1 = "Company.json";
+                string jsonString1 = JsonSerializer.Serialize(company);
+                File.WriteAllText(fileName1, jsonString1);
+
+                var department = db.Departments;
+                string fileName2 = "Department.json";
+                string jsonString2 = JsonSerializer.Serialize(department);
+                File.WriteAllText(fileName2, jsonString2);
+
+                var position = db.Positions;
+                string fileName3 = "Position.json";
+                string jsonString3 = JsonSerializer.Serialize(position);
+                File.WriteAllText(fileName3, jsonString3);
+
+                var employee = db.Employees;
+                string fileName4 = "Employee.json";
+                string jsonString4 = JsonSerializer.Serialize(employee);
+                File.WriteAllText(fileName4, jsonString4);
+            }
         }
     }
 }

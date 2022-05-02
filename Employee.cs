@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TestTaskBGL
 {
@@ -12,7 +13,7 @@ namespace TestTaskBGL
         public string EmpPatronymic { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string Phone { get; set; } = null!;
-
+        [JsonIgnore]
         public virtual Position Position { get; set; } = null!;
     }
 }
