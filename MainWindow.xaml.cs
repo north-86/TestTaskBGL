@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
-//using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace TestTaskBGL
 {
@@ -388,6 +388,64 @@ namespace TestTaskBGL
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void UploadXML_Click(object sender, RoutedEventArgs e)
+        {
+            using (test_task_bgldbContext db = new test_task_bgldbContext())
+            {
+                string file1 = "company.xml";
+                var companyXML = db.Companies.ToArray();
+                XDocument doc1 = new XDocument(
+                    new XElement("companies",
+                    from c in companyXML
+                    select new XElement("company",
+                    new XAttribute("companyId", c.CompanyId),
+                    new XAttribute("companyName", c.CompanyName))));
+                doc1.Save(file1);
+
+                string file2 = "department.xml";
+                var departmentXML = db.Departments.ToArray();
+                XDocument doc2 = new XDocument(
+                    new XElement("departments",
+                    from d in departmentXML
+                    select new XElement("department",
+                    new XAttribute("departmentId", d.DepartmentId),
+                    new XAttribute("companyId", d.CompanyId),
+                    new XAttribute("departmentName", d.DepartmentName))));
+                doc2.Save(file2);
+
+                string file3 = "position.xml";
+                var positionXML = db.Positions.ToArray();
+                XDocument doc3 = new XDocument(
+                    new XElement("positions",
+                    from p in positionXML
+                    select new XElement("position",
+                    new XAttribute("positionId", p.PositionId),
+                    new XAttribute("departmentId", p.DepartmentId),
+                    new XAttribute("positionName", p.PositionName))));
+                doc3.Save(file3);
+
+                string file4 = "employee.xml";
+                var employeeXML = db.Employees.ToArray();
+                XDocument doc4 = new XDocument(
+                    new XElement("employees",
+                    from emp in employeeXML
+                    select new XElement("employee",
+                    new XAttribute("employeeId", emp.EmployeeId),
+                    new XAttribute("positionId", emp.PositionId),
+                    new XAttribute("empSurname", emp.EmpSurname),
+                    new XAttribute("empName", emp.EmpName),
+                    new XAttribute("empPatronymic", emp.EmpPatronymic),
+                    new XAttribute("address", emp.Address),
+                    new XAttribute("phone", emp.Phone))));
+                doc4.Save(file4);
+            }
+        }
+
+        private void UploadJSON_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
